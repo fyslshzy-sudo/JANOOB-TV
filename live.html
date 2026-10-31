@@ -9,48 +9,75 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#101c27;color:white;
+ margin:0;
+ background:#101c27;
+ color:white;
  font-family:Tahoma,Arial,sans-serif;
 }
 header{
- background:#102b40;padding:20px;
- text-align:center;border-bottom:3px solid #d92332;
+ background:#102b40;
+ padding:22px 12px;
+ text-align:center;
+ border-bottom:3px solid #d92332;
 }
 header h1{margin:0;font-size:25px}
-header p{margin:8px 0 0;color:#dce7ed}
-nav{background:#172f41;padding:14px;text-align:center}
-nav a{color:white;text-decoration:none;margin:0 12px;font-size:14px}
-main{max-width:1050px;margin:30px auto;padding:15px}
-.title{text-align:center;margin:25px 0}
-.title h2{font-size:27px}
-.status{color:#ff6262;font-weight:bold;margin:15px}
+header p{margin:9px 0 0;color:#dce7ed}
+nav{
+ background:#172f41;
+ padding:15px;
+ text-align:center;
+}
+nav a{
+ color:white;
+ text-decoration:none;
+ margin:0 12px;
+ font-size:14px;
+}
+main{
+ max-width:1100px;
+ margin:30px auto;
+ padding:15px;
+}
+.heading{text-align:center;margin:25px 0}
+.heading h2{font-size:27px}
+.live-label{
+ display:inline-block;
+ background:#d92332;
+ padding:7px 16px;
+ border-radius:5px;
+ font-size:13px;
+ margin-bottom:15px;
+}
 .player{
- background:#000;border:2px solid #29485c;
- border-radius:12px;overflow:hidden;
+ background:#000;
+ border:2px solid #29485c;
+ border-radius:12px;
+ overflow:hidden;
+ box-shadow:0 8px 25px #0005;
 }
-video{width:100%;display:block;aspect-ratio:16/9;background:#000}
-.controls{
- background:#1a3040;padding:20px;
- border-radius:10px;margin-top:20px;
+video{
+ width:100%;
+ display:block;
+ aspect-ratio:16/9;
+ background:#000;
 }
-input{
- width:100%;padding:14px;border:1px solid #466174;
- border-radius:6px;background:#0e202d;
- color:white;margin:12px 0;font-size:15px;
- direction:ltr;
+.message{
+ text-align:center;
+ color:#bdcbd5;
+ font-size:13px;
+ margin-top:15px;
 }
-button{
- background:#d92332;color:white;border:0;
- padding:13px 22px;border-radius:6px;
- font-size:15px;font-weight:bold;cursor:pointer;
+footer{
+ text-align:center;
+ background:#091722;
+ padding:22px;
+ color:#b7c8d3;
+ margin-top:50px;
 }
-button:hover{background:#aa1825}
-.note{color:#b7c8d3;line-height:1.8;font-size:13px}
-footer{text-align:center;background:#091722;padding:22px;color:#b7c8d3;margin-top:50px}
 @media(max-width:600px){
  header h1{font-size:21px}
  nav a{display:inline-block;margin:7px}
- .title h2{font-size:22px}
+ .heading h2{font-size:22px}
 }
 </style>
 </head>
@@ -69,24 +96,18 @@ footer{text-align:center;background:#091722;padding:22px;color:#b7c8d3;margin-to
 </nav>
 
 <main>
- <div class="title">
-  <h2>البث المباشر</h2>
-  <div class="status" id="status">● جاهز لتشغيل البث</div>
+ <div class="heading">
+  <div class="live-label">● البث المباشر</div>
+  <h2>مشاهدة قناة الجنوب الفضائية</h2>
  </div>
 
  <div class="player">
-  <video id="video" controls playsinline></video>
+  <video id="video" controls playsinline
+   preload="metadata"></video>
  </div>
 
- <div class="controls">
-  <h3>مشاهدة البث</h3>
-  <input id="streamUrl" type="url"
-   placeholder="ضع رابط البث m3u8 أو الفيديو MP4">
-  <button onclick="playStream()">تشغيل البث</button>
-  <p class="note">
-   يدعم المشغل روابط البث المباشر HLS وروابط الفيديو MP4
-   المباشرة. يجب أن يكون الرابط متاحاً للتشغيل من موقع خارجي.
-  </p>
+ <div class="message" id="status">
+  البث التجريبي لقناة الجنوب الفضائية
  </div>
 </main>
 
@@ -96,70 +117,32 @@ footer{text-align:center;background:#091722;padding:22px;color:#b7c8d3;margin-to
 </footer>
 
 <script>
+const STREAM_URL =
+"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+
 const video = document.getElementById("video");
 const statusBox = document.getElementById("status");
-let hls = null;
 
-function playStream(){
- const url = document.getElementById("streamUrl").value.trim();
+if(Hls.isSupported()){
+ const hls = new Hls();
+ hls.loadSource(STREAM_URL);
+ hls.attachMedia(video);
 
- if(!url){
-  statusBox.textContent = "يرجى إدخال رابط البث أولاً";
-  return;
- }
+ hls.on(Hls.Events.MANIFEST_PARSED,()=>{
+  statusBox.textContent = "البث جاهز للمشاهدة";
+ });
 
- if(hls){
-  hls.destroy();
-  hls = null;
- }
-
- video.pause();
- video.removeAttribute("src");
- video.load();
-
- statusBox.textContent = "جاري الاتصال بالبث...";
-
- if(url.toLowerCase().includes(".m3u8")){
-  if(Hls.isSupported()){
-   hls = new Hls();
-   hls.loadSource(url);
-   hls.attachMedia(video);
-
-   hls.on(Hls.Events.MANIFEST_PARSED,function(){
-    statusBox.textContent = "تم الاتصال بالبث، اضغط تشغيل";
-    video.play().catch(()=>{});
-   });
-
-   hls.on(Hls.Events.ERROR,function(event,data){
-    if(data.fatal){
-     statusBox.textContent = "تعذر تشغيل البث. تحقق من الرابط أو صلاحية الوصول.";
-    }
-   });
-  }else if(video.canPlayType("application/vnd.apple.mpegurl")){
-   video.src = url;
-   video.play().catch(()=>{});
-  }else{
-   statusBox.textContent = "هذا المتصفح لا يدعم تشغيل HLS";
+ hls.on(Hls.Events.ERROR,(event,data)=>{
+  if(data.fatal){
+   statusBox.textContent =
+   "تعذر الاتصال بالبث التجريبي حالياً";
   }
- }else{
-  video.src = url;
-  video.play().then(()=>{
-   statusBox.textContent = "يتم تشغيل الفيديو";
-  }).catch(()=>{
-   statusBox.textContent = "تعذر التشغيل. تحقق من الرابط وصلاحياته.";
-  });
- }
+ });
+}else if(video.canPlayType("application/vnd.apple.mpegurl")){
+ video.src = STREAM_URL;
+}else{
+ statusBox.textContent = "المتصفح لا يدعم تشغيل هذا البث";
 }
-
-video.addEventListener("playing",()=>{
- statusBox.textContent = "● البث يعمل الآن";
-});
-video.addEventListener("waiting",()=>{
- statusBox.textContent = "جاري تحميل البث...";
-});
-video.addEventListener("error",()=>{
- statusBox.textContent = "حدث خطأ في تشغيل الفيديو";
-});
 </script>
 
 </body>
