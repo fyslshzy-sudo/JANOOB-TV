@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأخبار | قناة الجنوب الفضائية</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#f2f4f6;color:#17232d;
+ font-family:Tahoma,Arial,sans-serif;
+}
+header{
+ background:#102b40;color:white;
+ padding:20px 5%;
+ display:flex;align-items:center;
+ justify-content:space-between;flex-wrap:wrap;gap:15px;
+ border-bottom:4px solid #d92332;
+}
+.brand h1{font-size:23px;margin:0}
+.brand p{margin:7px 0 0;color:#d8e5ec;font-size:13px}
+nav{display:flex;gap:16px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-size:14px}
+nav a:hover{color:#f5c75b}
+.breaking{
+ background:#d92332;color:white;
+ display:flex;align-items:center;gap:15px;
+ overflow:hidden;padding:12px 5%;
+}
+.breaking strong{white-space:nowrap}
+.breaking span{font-size:14px;line-height:1.7}
+.container{max-width:1150px;margin:30px auto;padding:0 18px}
+.section-title{
+ font-size:23px;border-right:5px solid #d92332;
+ padding-right:12px;margin:30px 0 20px;
+}
+.categories{
+ display:flex;gap:10px;flex-wrap:wrap;
+ margin-bottom:25px;
+}
+.category{
+ background:white;border:1px solid #dce2e7;
+ border-radius:20px;padding:9px 17px;
+ color:#30495a;font-size:13px;
+}
+.category.active{background:#102b40;color:white}
+.featured{
+ display:grid;grid-template-columns:1.5fr 1fr;
+ gap:18px;
+}
+.feature{
+ background:white;border-radius:10px;
+ overflow:hidden;box-shadow:0 3px 12px #00000010;
+}
+.feature img{
+ width:100%;height:245px;object-fit:cover;
+ display:block;background:#dce3e8;
+}
+.feature-content{padding:18px}
+.feature h2,.feature h3{margin:0 0 12px;color:#163b53}
+.feature p{color:#65737d;line-height:1.9;font-size:14px}
+.read{
+ color:#c52030;text-decoration:none;font-weight:bold;
+ font-size:14px;
+}
+.news-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:18px;
+}
+.news-card{
+ background:white;border-radius:9px;
+ overflow:hidden;box-shadow:0 3px 12px #00000010;
+}
+.news-card img{
+ width:100%;height:175px;object-fit:cover;
+ display:block;background:#dce3e8;
+}
+.news-content{padding:16px}
+.news-content small{color:#c52030}
+.news-content h3{font-size:17px;line-height:1.7;margin:10px 0}
+.news-content p{font-size:13px;color:#687680;line-height:1.8}
+.empty{
+ background:white;padding:35px;text-align:center;
+ color:#687680;border-radius:10px;
+}
+.about{
+ background:#102b40;color:white;
+ text-align:center;padding:30px 15px;
+ line-height:2;margin-top:45px;
+}
+footer{
+ background:#091722;color:#bdcbd4;
+ text-align:center;padding:20px;font-size:13px;
+}
+@media(max-width:750px){
+ .featured{grid-template-columns:1fr}
+ .news-grid{grid-template-columns:repeat(2,1fr)}
+ header{justify-content:center;text-align:center}
+ nav{justify-content:center}
+}
+@media(max-width:480px){
+ .news-grid{grid-template-columns:1fr}
+ .feature img{height:200px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="brand">
+  <h1>قناة الجنوب الفضائية</h1>
+  <p>صوت شعب الجنوب</p>
+ </div>
+ <nav>
+  <a href="index.html">الرئيسية</a>
+  <a href="live.html">البث المباشر</a>
+  <a href="news.html">الأخبار</a>
+  <a href="programs.html">البرامج</a>
+  <a href="videos.html">مكتبة الفيديو</a>
+  <a href="about.html">من نحن</a>
+ </nav>
+</header>
+
+<div class="breaking">
+ <strong>عاجل</strong>
+ <span>مرحباً بكم في الصفحة الإخبارية لقناة الجنوب الفضائية</span>
+</div>
+
+<main class="container">
+
+ <h2 class="section-title">الأخبار الرئيسية</h2>
+
+ <div class="categories">
+  <span class="category active">كل الأخبار</span>
+  <span class="category">أخبار محلية</span>
+  <span class="category">سياسية</span>
+  <span class="category">اقتصادية</span>
+  <span class="category">دولية</span>
+ </div>
+
+ <section class="featured">
+  <article class="feature">
+   <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000" alt="الأخبار الرئيسية">
+   <div class="feature-content">
+    <h2>أبرز الأخبار والتغطيات</h2>
+    <p>تابعوا عبر قناة الجنوب الفضائية آخر المستجدات والتغطيات الإخبارية والتقارير من مختلف المناطق.</p>
+    <span class="read">الأخبار والتقارير</span>
+   </div>
+  </article>
+
+  <article class="feature">
+   <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800" alt="التغطيات الإعلامية">
+   <div class="feature-content">
+    <h3>التغطية الإخبارية</h3>
+    <p>منصة لمتابعة الأحداث والتطورات والتقارير الإعلامية أولاً بأول.</p>
+    <span class="read">قناة الجنوب الفضائية</span>
+   </div>
+  </article>
+ </section>
+
+ <h2 class="section-title">آخر الأخبار</h2>
+
+ <section class="news-grid">
+
+  <article class="news-card">
+   <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=700" alt="أخبار سياسية">
+   <div class="news-content">
+    <small>أخبار سياسية</small>
+    <h3>متابعة آخر التطورات السياسية</h3>
+    <p>تغطية ومتابعة لأبرز المستجدات السياسية والتطورات الإقليمية.</p>
+   </div>
+  </article>
+
+  <article class="news-card">
+   <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=700" alt="أخبار اقتصادية">
+   <div class="news-content">
+    <small>أخبار اقتصادية</small>
+    <h3>متابعة الشأن الاقتصادي</h3>
+    <p>تقارير حول الأسواق والاقتصاد والخدمات والأوضاع المعيشية.</p>
+   </div>
+  </article>
+
+  <article class="news-card">
+   <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700" alt="تقارير">
+   <div class="news-content">
+    <small>تقارير</small>
+    <h3>تقارير ميدانية وإعلامية</h3>
+    <p>مساحة للتقارير المصورة والموضوعات الصحفية المتنوعة.</p>
+   </div>
+  </article>
+
+ </section>
+
+ <div class="empty" style="margin-top:22px">
+  سيتم عرض الأخبار الجديدة هنا بعد ربط الصفحة بلوحة التحكم.
+ </div>
+
+</main>
+
+<section class="about">
+ <h2>قناة الجنوب الفضائية</h2>
+ <p>صوت شعب الجنوب</p>
+ <p>نقل الخبر والتغطية الإعلامية والبرامج المتنوعة.</p>
+</section>
+
+<footer>
+ جميع الحقوق محفوظة © قناة الجنوب الفضائية
+</footer>
+
+</body>
+</html>
