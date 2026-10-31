@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم قناة الجنوب الفضائية</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#071426;color:#fff;font-family:Tahoma,Arial,sans-serif}
+header{background:#102945;padding:18px;text-align:center;border-bottom:3px solid #c92332}
+header h1{margin:0;font-size:22px}
+header p{color:#e6bd62;margin:8px 0 0}
+.container{max-width:1000px;margin:auto;padding:18px}
+.panel{background:#10243c;border:1px solid #294766;border-radius:12px;padding:18px;margin:18px 0}
+h2{font-size:19px;border-right:4px solid #c92332;padding-right:10px}
+input,textarea,select{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #49627c;border-radius:6px;background:#071426;color:white;font-size:15px}
+textarea{min-height:90px;resize:vertical}
+button{border:0;border-radius:6px;padding:11px 17px;margin:5px;background:#c92332;color:white;font-size:14px;cursor:pointer}
+button.secondary{background:#31516f}
+button.danger{background:#8e202b}
+button:disabled{opacity:.5}
+.hidden{display:none!important}
+.notice{padding:12px;background:#173c34;border-radius:7px;margin:10px 0;line-height:1.7}
+.error{background:#54232b}
+.item{background:#091a2d;border:1px solid #294766;border-radius:8px;padding:13px;margin:10px 0}
+.item h3{margin:5px 0 10px}
+.item img{width:100%;max-height:180px;object-fit:cover;border-radius:6px}
+.item small{color:#e6bd62}
+.actions{display:flex;flex-wrap:wrap;gap:5px}
+label{display:block;margin-top:8px;color:#d9e5f2}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+#status{line-height:1.8}
+</style>
+</head>
+<body>
+
+<header>
+<h1>لوحة تحكم قناة الجنوب الفضائية</h1>
+<p>صوت شعب الجنوب</p>
+</header>
+
+<main class="container">
+
+<section id="loginPanel" class="panel">
+<h2>دخول المدير</h2>
+<label>البريد الإلكتروني</label>
+<input id="email" type="email" placeholder="أدخل بريد المدير">
+<label>كلمة المرور</label>
+<input id="password" type="password" placeholder="أدخل كلمة المرور">
+<button id="loginBtn">تسجيل الدخول</button>
+<div id="loginMessage" role="status"></div>
+</section>
+
+<section id="dashboard" class="hidden">
+
+<div class="panel topbar">
+<div>
+<h2>مرحباً بك في لوحة التحكم</h2>
+<div id="adminEmail"></div>
+</div>
+<button class="danger" id="logoutBtn">تسجيل الخروج</button>
+</div>
+
+<section class="panel">
+<h2>إدارة البث المباشر</h2>
+<label>رابط البث أو رابط المشاهدة</label>
+<input id="liveUrl" type="url" placeholder="https://example.com/live">
+<button id="saveLive">حفظ رابط البث</button>
+<div id="liveMessage"></div>
+</section>
+
+<section class="panel">
+<h2 id="formHeading">إضافة محتوى جديد</h2>
+
+<label>نوع المحتوى</label>
+<select id="contentType">
+<option value="news">خبر</option>
+<option value="programs">برنامج</option>
+<option value="videos">فيديو</option>
+</select>
+
+<label>العنوان</label>
+<input id="title" type="text" placeholder="عنوان المحتوى">
+
+<label>وصف المحتوى</label>
+<textarea id="description" placeholder="اكتب وصفاً مختصراً"></textarea>
+
+<label>رابط الصورة المصغرة</label>
+<input id="imageUrl" type="url" placeholder="رابط صورة يبدأ بـ https://">
+
+<label>رابط الفيديو أو صفحة المحتوى (اختياري)</label>
+<input id="contentUrl" type="url" placeholder="https://">
+
+<label>حالة النشر</label>
+<select id="published">
+<option value="true">منشور</option>
+<option value="false">مسودة</option>
+</select>
+
+<button id="saveContent">حفظ المحتوى</button>
+<button id="cancelEdit" class="secondary hidden">إلغاء التعديل</button>
+<div id="formMessage"></div>
+</section>
+
+<section class="panel">
+<h2>المحتوى المنشور والمسودات</h2>
+<label>عرض القسم</label>
+<select id="filterType">
+<option value="all">جميع الأقسام</option>
+<option value="news">الأخبار</option>
+<option value="programs">البرامج</option>
+<option value="videos">الفيديوهات</option>
+</select>
+<div id="contentList">جارٍ تحميل المحتوى...</div>
+</section>
+
+</section>
+</main>
+
+<script type="module">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+ getAuth, signInWithEmailAndPassword,
+ onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+ getFirestore, collection, addDoc, getDocs,
+ doc, updateDoc, deleteDoc, setDoc, getDoc,
+ serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// إعدادات مشروع Firebase
+const firebaseConfig = {
+ apiKey: "AIzaSyCPdzH9CCUgzrF1x8ttxRVWHMjyXObs8yM",
+ authDomain: "janoob-tv.firebaseapp.com",
+ projectId: "janoob-tv",
+ storageBucket: "janoob-tv.firebasestorage.app",
+ messagingSenderId: "53846628655",
+ appId: "1:2300300cfb13b9f2f469da",
+ measurementId: "G-2MY4E62F7R"
+};
+
+// معرّف المدير المصرح له
+const ADMIN_UID = "DKHQI1BfYTMIELOSeHSAwhav4pH2";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const $ = id => document.getElementById(id);
+
+let editingId = null;
+let editingType = null;
+let allItems = [];
+
+function message(id, text, error=false){
+ const el = $(id);
+ el.textContent = text;
+ el.className = error ? "notice error" : "notice";
+}
+
+function escapeHTML(value=""){
+ return String(value).replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+const typeNames = {
+ news:"خبر",
+ programs:"برنامج",
+ videos:"فيديو"
+};
+
+// تسجيل الدخول
+$("loginBtn").addEventListener("click", async () => {
+ const email = $("email").value.trim();
+ const password = $("password").value;
+
+ if(!email || !password){
+  message("loginMessage","أدخل البريد الإلكتروني وكلمة المرور.",true);
+  return;
+ }
+
+ $("loginBtn").disabled = true;
+
+ try{
+  await signInWithEmailAndPassword(auth,email,password);
+ }catch(error){
+  message("loginMessage","تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور.",true);
+ }finally{
+  $("loginBtn").disabled = false;
+ }
+});
+
+// مراقبة حالة تسجيل الدخول والتحقق من هوية المدير
+onAuthStateChanged(auth, async user => {
+ if(user && user.uid === ADMIN_UID){
+  $("loginPanel").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  $("adminEmail").textContent = user.email || "";
+  await loadAll();
+  await loadLive();
+ }else{
+  $("dashboard").classList.add("hidden");
+  $("loginPanel").classList.remove("hidden");
+
+  if(user && user.uid !== ADMIN_UID){
+   message("loginMessage","هذا الحساب غير مصرح له بدخول لوحة التحكم.",true);
+   await signOut(auth);
+  }
+ }
+});
+
+// تسجيل الخروج
+$("logoutBtn").addEventListener("click", async () => {
+ await signOut(auth);
+});
+
+// حفظ المحتوى
+$("saveContent").addEventListener("click", async () => {
+ const user = auth.currentUser;
+ if(!user || user.uid !== ADMIN_UID) return;
+
+ const type = $("contentType").value;
+ const title = $("title").value.trim();
+ const description = $("description").value.trim();
+ const imageUrl = $("imageUrl").value.trim();
+ const url = $("contentUrl").value.trim();
+ const published = $("published").value === "true";
+
+ if(!title){
+  message("formMessage","يرجى كتابة عنوان المحتوى.",true);
+  return;
+ }
+
+ if(imageUrl && !imageUrl.startsWith("https://")){
+  message("formMessage","يجب أن يبدأ رابط الصورة بـ https://",true);
+  return;
+ }
+
+ if(url && !url.startsWith("https://")){
+  message("formMessage","يجب أن يبدأ رابط المحتوى بـ https://",true);
+  return;
+ }
+
+ const data = {
+  title, description, imageUrl, url, published,
+  updatedAt: serverTimestamp()
+ };
+
+ $("saveContent").disabled = true;
+
+ try{
+  if(editingId && editingType === type){
+   await updateDoc(doc(db,type,editingId),data);
+   message("formMessage","تم تحديث المحتوى بنجاح.");
+  }else{
+   data.createdAt = serverTimestamp();
+   await addDoc(collection(db,type),data);
+   message("formMessage","تمت إضافة المحتوى بنجاح.");
+  }
+
+  clearForm();
+  await loadAll();
+
+ }catch(error){
+  console.error(error);
+  message("formMessage","حدث خطأ أثناء الحفظ. تحقق من قواعد Firestore واتصال الإنترنت.",true);
+ }finally{
+  $("saveContent").disabled = false;
+ }
+});
+
+// تحميل جميع الأقسام
+async function loadAll(){
+ const types = ["news","programs","videos"];
+ allItems = [];
+
+ try{
+  for(const type of types){
+   const snap = await getDocs(collection(db,type));
+   snap.forEach(item => {
+    allItems.push({
+     id:item.id,
+     type,
+     ...item.data()
+    });
+   });
+  }
+  renderItems();
+ }catch(error){
+  console.error(error);
+  $("contentList").textContent = "تعذر تحميل المحتوى. تحقق من قواعد Firestore.";
+ }
+}
+
+// عرض المحتوى
+function renderItems(){
+ const filter = $("filterType").value;
+ const items = allItems.filter(item =>
+  filter === "all" || item.type === filter
+ );
+
+ if(items.length === 0){
+  $("contentList").textContent = "لا يوجد محتوى في هذا القسم حالياً.";
+  return;
+ }
+
+ $("contentList").innerHTML = items.map(item => `
+  <article class="item">
+   ${item.imageUrl ? `<img src="${escapeHTML(item.imageUrl)}" alt="">` : ""}
+   <small>${typeNames[item.type]} — ${item.published ? "منشور" : "مسودة"}</small>
+   <h3>${escapeHTML(item.title || "")}</h3>
+   <p>${escapeHTML(item.description || "")}</p>
+   <div class="actions">
+    <button class="secondary" data-edit="${escapeHTML(item.id)}" data-type="${item.type}">تعديل</button>
+    <button class="danger" data-delete="${escapeHTML(item.id)}" data-type="${item.type}">حذف</button>
+   </div>
+  </article>
+ `).join("");
+}
+
+$("filterType").addEventListener("change",renderItems);
+
+// التعامل مع أزرار التعديل والحذف
+$("contentList").addEventListener("click",async event => {
+ const editButton = event.target.closest("[data-edit]");
+ const deleteButton = event.target.closest("[data-delete]");
+
+ if(editButton){
+  const item = allItems.find(x =>
+   x.id === editButton.dataset.edit &&
+   x.type === editButton.dataset.type
+  );
+  if(!item) return;
+
+  editingId = item.id;
+  editingType = item.type;
+
+  $("contentType").value = item.type;
+  $("title").value = item.title || "";
+  $("description").value = item.description || "";
+  $("imageUrl").value = item.imageUrl || "";
+  $("contentUrl").value = item.url || "";
+  $("published").value = String(item.published === true);
+
+  $("formHeading").textContent = "تعديل المحتوى";
+  $("saveContent").textContent = "حفظ التعديلات";
+  $("cancelEdit").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+
+ if(deleteButton){
+  const id = deleteButton.dataset.delete;
+  const type = deleteButton.dataset.type;
+
+  if(!confirm("هل أنت متأكد من حذف هذا المحتوى؟")) return;
+
+  try{
+   await deleteDoc(doc(db,type,id));
+   await loadAll();
+  }catch(error){
+   alert("تعذر الحذف. تحقق من صلاحيات قاعدة البيانات.");
+  }
+ }
+});
+
+// إلغاء التعديل
+function clearForm(){
+ editingId = null;
+ editingType = null;
+ $("title").value = "";
+ $("description").value = "";
+ $("imageUrl").value = "";
+ $("contentUrl").value = "";
+ $("published").value = "true";
+ $("formHeading").textContent = "إضافة محتوى جديد";
+ $("saveContent").textContent = "حفظ المحتوى";
+ $("cancelEdit").classList.add("hidden");
+}
+
+$("cancelEdit").addEventListener("click",clearForm);
+
+// رابط البث المباشر
+async function loadLive(){
+ try{
+  const snap = await getDoc(doc(db,"settings","live"));
+  if(snap.exists()){
+   $("liveUrl").value = snap.data().liveUrl || "";
+  }
+ }catch(error){
+  message("liveMessage","تعذر تحميل رابط البث.",true);
+ }
+}
+
+$("saveLive").addEventListener("click",async () => {
+ const user = auth.currentUser;
+ if(!user || user.uid !== ADMIN_UID) return;
+
+ const liveUrl = $("liveUrl").value.trim();
+
+ if(liveUrl && !liveUrl.startsWith("https://")){
+  message("liveMessage","يجب أن يبدأ الرابط بـ https://",true);
+  return;
+ }
+
+ try{
+  await setDoc(doc(db,"settings","live"),{
+   liveUrl,
+   updatedAt:serverTimestamp()
+  },{merge:true});
+
+  message("liveMessage","تم حفظ رابط البث بنجاح.");
+ }catch(error){
+  message("liveMessage","تعذر حفظ الرابط. تحقق من قواعد Firestore.",true);
+ }
+});
+</script>
+
+</body>
+  </html>
