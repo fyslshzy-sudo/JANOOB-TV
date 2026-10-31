@@ -7,181 +7,202 @@
 <title>قناة الجنوب الفضائية | صوت شعب الجنوب</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Tahoma,Arial,sans-serif;
- background:#f3f5f7;
- color:#17212b;
+body{margin:0;background:#06101e;color:#fff;font-family:Tahoma,Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+header{background:linear-gradient(120deg,#071426,#142e4b,#071426);border-bottom:3px solid #c92332;padding:12px 15px}
+.header-inner{max-width:1200px;margin:auto;display:flex;align-items:center;gap:20px}
+.logo{width:180px;height:85px;object-fit:contain}
+.brand{flex:1}
+.brand h1{font-size:25px;margin:0 0 8px}
+.brand p{color:#e6bd62;margin:0;font-size:15px}
+.live-label{background:#c92332;padding:9px 15px;border-radius:5px;font-size:13px;white-space:nowrap}
+nav{background:#102945;position:sticky;top:0;z-index:10;padding:13px;text-align:center;border-bottom:1px solid #294766}
+nav a{display:inline-block;margin:5px 12px;font-size:14px;color:#e8edf4}
+nav a:hover{color:#ff6570}
+.container{max-width:1200px;margin:auto;padding:22px 15px}
+.hero{position:relative;min-height:330px;border-radius:13px;overflow:hidden;background:linear-gradient(90deg,rgba(3,12,25,.15),rgba(3,12,25,.9)),url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=85') center/cover;display:flex;align-items:end;padding:30px;margin-bottom:30px;border:1px solid #294766}
+.hero-content{max-width:650px}
+.hero-tag{background:#c92332;padding:7px 13px;border-radius:4px;font-size:13px}
+.hero h2{font-size:30px;line-height:1.6;margin:15px 0 8px}
+.hero p{color:#d8e2ed;line-height:1.9}
+.section{margin:32px 0}
+.section-head{display:flex;justify-content:space-between;align-items:center;border-right:4px solid #c92332;padding-right:12px;margin-bottom:18px}
+.section-head h2{font-size:22px;margin:0}
+.more{font-size:13px;color:#f16a75}
+.feature-card{display:grid;grid-template-columns:1.2fr 1fr;background:#10243c;border:1px solid #294766;border-radius:11px;overflow:hidden;margin-bottom:16px}
+.feature-card img{width:100%;height:260px;object-fit:cover}
+.feature-info{padding:22px;display:flex;flex-direction:column;justify-content:center}
+.feature-info small{color:#ff6974}
+.feature-info h3{font-size:21px;line-height:1.7}
+.feature-info p{color:#bdcada;line-height:1.9;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:#10243c;border:1px solid #203b58;border-radius:10px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:#c92332}
+.card img{width:100%;height:165px;object-fit:cover;display:block}
+.card-body{padding:14px}
+.card-body small{color:#f16a75;font-size:12px}
+.card-body h3{font-size:16px;line-height:1.7;margin:8px 0}
+.card-body p{font-size:13px;color:#b8c7d7;line-height:1.8}
+.card-link{display:inline-block;color:#fff;background:#bd2635;padding:8px 14px;border-radius:5px;font-size:12px;margin-top:7px}
+.live-box{background:linear-gradient(110deg,#142f4d,#09182a);border:1px solid #294766;border-radius:12px;padding:25px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.live-box h2{margin:0 0 10px}
+.live-box p{color:#c1cede;margin:0;line-height:1.8}
+.live-button{background:#c92332;color:white;padding:12px 20px;border-radius:6px;white-space:nowrap}
+footer{background:#030a13;text-align:center;padding:28px 12px;margin-top:40px;color:#aab8c8;font-size:13px;line-height:2}
+footer img{width:135px;height:65px;object-fit:contain}
+@media(max-width:700px){
+.header-inner{flex-wrap:wrap;justify-content:center;text-align:center}
+.logo{width:145px;height:70px}
+.brand{flex-basis:100%}
+.brand h1{font-size:21px}
+.live-label{margin-bottom:5px}
+.hero{min-height:270px;padding:20px}
+.hero h2{font-size:22px}
+.feature-card{grid-template-columns:1fr}
+.feature-card img{height:210px}
+.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card img{height:125px}
+.card-body{padding:10px}
+.card-body h3{font-size:14px}
+.live-box{flex-direction:column;text-align:center}
 }
-header{
- background:#102b40;
- color:white;
- padding:18px 5%;
- display:flex;
- align-items:center;
- justify-content:space-between;
- flex-wrap:wrap;
- gap:15px;
-}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{
- width:55px;height:55px;border-radius:50%;
- background:linear-gradient(to bottom,#fff 0 33%,#168447 33% 66%,#111 66%);
- border:2px solid white;
- position:relative;
-}
-.logo:after{
- content:"";position:absolute;left:0;top:0;
- border-top:27px solid transparent;
- border-bottom:27px solid transparent;
- border-left:25px solid #d92332;
-}
-.brand h1{font-size:23px;margin:0}
-.brand p{margin:5px 0 0;color:#d7e4ed;font-size:13px}
-nav{display:flex;gap:17px;flex-wrap:wrap}
-nav a{
- color:white;text-decoration:none;font-size:14px;
-}
-nav a:hover{color:#f4c75e}
-.hero{
- min-height:390px;
- background:linear-gradient(120deg,#102b40ed,#174e66dd),
- linear-gradient(45deg,#123,#456);
- color:white;text-align:center;
- display:flex;flex-direction:column;
- justify-content:center;align-items:center;
- padding:45px 20px;
-}
-.hero h2{font-size:36px;margin:0 0 15px}
-.hero p{font-size:19px;line-height:1.9;max-width:650px}
-.live-button{
- display:inline-block;margin-top:18px;
- background:#d92332;color:white;
- padding:14px 28px;border-radius:7px;
- text-decoration:none;font-weight:bold;
-}
-.section{padding:35px 5%}
-.section-title{
- border-right:5px solid #d92332;
- padding-right:12px;margin-bottom:22px;
- font-size:23px;
-}
-.cards{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:18px;
-}
-.card{
- background:white;border-radius:10px;
- overflow:hidden;box-shadow:0 3px 12px #00000012;
-}
-.card-image{
- height:145px;background:#dce5eb;
- display:flex;align-items:center;justify-content:center;
- color:#526575;font-size:42px;
-}
-.card-content{padding:18px}
-.card h3{margin:0 0 10px;color:#173c54}
-.card p{color:#65727c;line-height:1.8;font-size:14px}
-.card a{color:#c52030;text-decoration:none;font-weight:bold}
-.about{
- background:#102b40;color:white;
- padding:35px 7%;text-align:center;line-height:2;
-}
-footer{
- background:#091c2a;color:#cbd6de;
- text-align:center;padding:20px;font-size:13px;
-}
-@media(max-width:600px){
- header{justify-content:center;text-align:center}
- nav{justify-content:center}
- .hero h2{font-size:27px}
- .hero p{font-size:16px}
-}
+@media(max-width:390px){.cards{grid-template-columns:1fr}.card img{height:190px}}
 </style>
 </head>
 <body>
 
 <header>
- <div class="brand">
-  <div class="logo"></div>
-  <div>
-   <h1>قناة الجنوب الفضائية</h1>
-   <p>صوت شعب الجنوب</p>
-  </div>
- </div>
- <nav>
-  <a href="index.html">الرئيسية</a>
-  <a href="live.html">البث المباشر</a>
-  <a href="news.html">الأخبار</a>
-  <a href="programs.html">البرامج</a>
-  <a href="videos.html">مكتبة الفيديو</a>
-  <a href="about.html">من نحن</a>
- </nav>
+<div class="header-inner">
+<img class="logo" src="logo.png" alt="شعار قناة الجنوب">
+<div class="brand">
+<h1>قناة الجنوب الفضائية</h1>
+<p>صوت شعب الجنوب</p>
+</div>
+<a class="live-label" href="live.html">● شاهد البث المباشر</a>
+</div>
 </header>
 
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="live.html">البث المباشر</a>
+<a href="news.html">الأخبار</a>
+<a href="programs.html">البرامج</a>
+<a href="videos.html">الفيديوهات</a>
+<a href="about.html">عن القناة</a>
+</nav>
+
+<main class="container">
+
 <section class="hero">
- <h2>قناة الجنوب الفضائية</h2>
- <p>
-  منصة إعلامية لنقل الأخبار والأحداث والبرامج
-  وتسليط الضوء على قضايا المجتمع وتطلعاته.
-  <br>
-  <strong>صوت شعب الجنوب</strong>
- </p>
- <a class="live-button" href="live.html">شاهد البث المباشر</a>
+<div class="hero-content">
+<span class="hero-tag">قناة الجنوب الفضائية</span>
+<h2>صوت شعب الجنوب</h2>
+<p>منصة إعلامية رقمية للأخبار والتقارير والبرامج والمواد الوثائقية، تواكب الأحداث وتقدم محتوى متنوعاً لجمهورها.</p>
+<a class="card-link" href="live.html">انتقل إلى البث المباشر</a>
+</div>
 </section>
 
 <section class="section">
- <h2 class="section-title">أقسام القناة</h2>
- <div class="cards">
+<div class="section-head">
+<h2>آخر الأخبار</h2>
+<a class="more" href="news.html">جميع الأخبار ←</a>
+</div>
 
-  <div class="card">
-   <div class="card-image">▶</div>
-   <div class="card-content">
-    <h3>البث المباشر</h3>
-    <p>تابع البث المباشر لقناة الجنوب الفضائية.</p>
-    <a href="live.html">مشاهدة البث ←</a>
-   </div>
-  </div>
+<div class="feature-card">
+<img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=85" alt="أخبار">
+<div class="feature-info">
+<small>أبرز الأخبار</small>
+<h3>تابع آخر الأخبار والتطورات عبر قناة الجنوب الفضائية</h3>
+<p>مساحة مخصصة لعرض أحدث الأخبار والصور المنشورة من لوحة التحكم عند ربط قاعدة البيانات.</p>
+<a class="card-link" href="news.html">متابعة الأخبار</a>
+</div>
+</div>
 
-  <div class="card">
-   <div class="card-image">📰</div>
-   <div class="card-content">
-    <h3>الأخبار</h3>
-    <p>تابع آخر الأخبار والتغطيات والمستجدات.</p>
-    <a href="news.html">تصفح الأخبار ←</a>
-   </div>
-  </div>
-
-  <div class="card">
-   <div class="card-image">🎙</div>
-   <div class="card-content">
-    <h3>البرامج</h3>
-    <p>شاهد برامج القناة وتقاريرها الإعلامية.</p>
-    <a href="programs.html">اكتشف البرامج ←</a>
-   </div>
-  </div>
-
-  <div class="card">
-   <div class="card-image">🎬</div>
-   <div class="card-content">
-    <h3>مكتبة الفيديوهات</h3>
-    <p>شاهد أرشيف الفيديوهات والتقارير المصورة.</p>
-    <a href="videos.html">تصفح المكتبة ←</a>
-   </div>
-  </div>
-
- </div>
+<div class="cards">
+<article class="card">
+<img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=700&q=80" alt="تغطيات">
+<div class="card-body"><small>تغطيات</small><h3>التغطيات والأحداث</h3><a class="card-link" href="news.html">اقرأ المزيد</a></div>
+</article>
+<article class="card">
+<img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=700&q=80" alt="تقارير">
+<div class="card-body"><small>تقارير</small><h3>التقارير الصحفية</h3><a class="card-link" href="news.html">اقرأ المزيد</a></div>
+</article>
+<article class="card">
+<img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=700&q=80" alt="متابعات">
+<div class="card-body"><small>متابعات</small><h3>متابعات وأحداث</h3><a class="card-link" href="news.html">اقرأ المزيد</a></div>
+</article>
+</div>
 </section>
 
-<section class="about">
- <h2>قناة الجنوب الفضائية</h2>
- <p>صوت شعب الجنوب</p>
- <p>منصة إعلامية تهتم بالأخبار والبرامج والتغطيات الإعلامية.</p>
+<section class="section">
+<div class="section-head">
+<h2>برامج القناة</h2>
+<a class="more" href="programs.html">جميع البرامج ←</a>
+</div>
+
+<div class="feature-card">
+<img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=900&q=85" alt="برامج تلفزيونية">
+<div class="feature-info">
+<small>برامج قناة الجنوب</small>
+<h3>برامج متنوعة تتابع قضايا المجتمع والشأن العام</h3>
+<p>تظهر هنا صورة البرنامج الأول في القائمة، ويمكن تحديثها من لوحة التحكم لاحقاً.</p>
+<a class="card-link" href="programs.html">استكشف البرامج</a>
+</div>
+</div>
+
+<div class="cards">
+<article class="card">
+<img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=700&q=80" alt="حوار">
+<div class="card-body"><small>حوارات</small><h3>برامج الحوار والنقاش</h3><a class="card-link" href="programs.html">مشاهدة البرامج</a></div>
+</article>
+<article class="card">
+<img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=700&q=80" alt="إعلام">
+<div class="card-body"><small>تقارير</small><h3>برامج وتقارير ميدانية</h3><a class="card-link" href="programs.html">مشاهدة البرامج</a></div>
+</article>
+<article class="card">
+<img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=700&q=80" alt="ثقافة">
+<div class="card-body"><small>منوعات</small><h3>برامج ثقافية ومنوعة</h3><a class="card-link" href="programs.html">مشاهدة البرامج</a></div>
+</article>
+</div>
 </section>
+
+<section class="section">
+<div class="section-head">
+<h2>أحدث الفيديوهات</h2>
+<a class="more" href="videos.html">مكتبة الفيديوهات ←</a>
+</div>
+
+<div class="cards">
+<article class="card">
+<img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=700&q=80" alt="فيديو">
+<div class="card-body"><small>أحدث فيديو</small><h3>شاهد أحدث إنتاجات القناة</h3><a class="card-link" href="videos.html">مشاهدة</a></div>
+</article>
+<article class="card">
+<img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=700&q=80" alt="تغطية">
+<div class="card-body"><small>تغطيات</small><h3>تغطيات وتقارير مصورة</h3><a class="card-link" href="videos.html">مشاهدة</a></div>
+</article>
+<article class="card">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="وثائقي">
+<div class="card-body"><small>وثائقيات</small><h3>مواد وثائقية ومحتوى مرئي</h3><a class="card-link" href="videos.html">مشاهدة</a></div>
+</article>
+</div>
+</section>
+
+<section class="live-box">
+<div>
+<h2>البث المباشر لقناة الجنوب</h2>
+<p>تابع البث المباشر عبر موقع قناة الجنوب الفضائية.</p>
+</div>
+<a class="live-button" href="live.html">▶ مشاهدة البث الآن</a>
+</section>
+
+</main>
 
 <footer>
- جميع الحقوق محفوظة © قناة الجنوب الفضائية
+<img src="logo.png" alt="شعار القناة">
+<div><strong>قناة الجنوب الفضائية</strong></div>
+<div>صوت شعب الجنوب</div>
+<div>جميع الحقوق محفوظة © 2026</div>
 </footer>
 
 </body>
