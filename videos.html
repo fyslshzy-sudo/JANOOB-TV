@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة الفيديوهات | قناة الجنوب الفضائية</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#071426;color:#fff;font-family:Tahoma,Arial,sans-serif}
+header{background:#0d2038;border-bottom:3px solid #c92332;padding:22px 15px;text-align:center}
+.logo{font-size:27px;font-weight:bold;color:#fff}
+.slogan{color:#ddd;margin-top:9px;font-size:14px}
+nav{background:#102945;padding:13px 8px;text-align:center}
+nav a{color:#fff;text-decoration:none;margin:7px 10px;display:inline-block;font-size:14px}
+nav a:hover{color:#ff5965}
+.container{max-width:1150px;margin:auto;padding:22px 15px}
+.section-title{border-right:4px solid #d52b3b;padding-right:12px;font-size:22px;margin:10px 0 20px}
+.player{background:#000;border:1px solid #263e59;border-radius:10px;overflow:hidden;margin-bottom:30px}
+video{width:100%;max-height:520px;display:block;background:#000}
+.player-note{text-align:center;color:#aaa;padding:14px;font-size:13px}
+.categories{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.category{background:#132d49;border:1px solid #294766;color:#fff;padding:9px 17px;border-radius:20px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:#10243c;border:1px solid #203b58;border-radius:10px;overflow:hidden;transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:#d52b3b}
+.thumb{height:155px;background:linear-gradient(135deg,#193b5b,#071426);display:flex;align-items:center;justify-content:center;font-size:45px}
+.card-content{padding:15px}
+.card h3{font-size:16px;margin:0 0 10px}
+.card p{font-size:13px;color:#b7c5d5;line-height:1.8;margin:0}
+.play{display:inline-block;margin-top:13px;background:#c92332;color:white;text-decoration:none;padding:8px 17px;border-radius:5px;font-size:13px}
+.empty{background:#10243c;border:1px dashed #45617e;border-radius:10px;text-align:center;padding:30px;color:#b7c5d5;line-height:2}
+footer{background:#06101e;text-align:center;padding:24px 12px;margin-top:35px;color:#aab8c8;font-size:13px;line-height:2}
+@media(max-width:600px){.logo{font-size:22px}nav a{margin:6px;font-size:13px}.container{padding:17px 12px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">قناة الجنوب الفضائية</div>
+<div class="slogan">صوت شعب الجنوب</div>
+</header>
+
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="live.html">البث المباشر</a>
+<a href="news.html">الأخبار</a>
+<a href="programs.html">البرامج</a>
+<a href="videos.html">مكتبة الفيديوهات</a>
+<a href="about.html">عن القناة</a>
+</nav>
+
+<main class="container">
+<h2 class="section-title">مشاهدة الفيديوهات</h2>
+
+<div class="player">
+<video id="mainVideo" controls playsinline preload="metadata">
+متصفحك لا يدعم تشغيل الفيديو.
+</video>
+<div class="player-note">اختر أحد الفيديوهات من المكتبة لمشاهدته هنا</div>
+</div>
+
+<h2 class="section-title">مكتبة الفيديوهات</h2>
+
+<div class="categories">
+<span class="category">جميع الفيديوهات</span>
+<span class="category">أخبار</span>
+<span class="category">تقارير</span>
+<span class="category">برامج</span>
+<span class="category">وثائقيات</span>
+</div>
+
+<div class="grid" id="videoLibrary">
+
+<div class="empty" style="grid-column:1/-1">
+<div style="font-size:38px">▶</div>
+<h3>مكتبة قناة الجنوب</h3>
+<p>ستظهر هنا الفيديوهات عند إضافة روابطها وربط المكتبة بنظام إدارة المحتوى.</p>
+</div>
+
+</div>
+</main>
+
+<footer>
+<strong>قناة الجنوب الفضائية</strong><br>
+صوت شعب الجنوب<br>
+جميع الحقوق محفوظة © 2026
+</footer>
+
+<script>
+// لإضافة فيديو لاحقاً، ضع عنوانه ورابطه وتصنيفه في القائمة أدناه.
+const videos = [
+  // مثال:
+  // { title: "عنوان الفيديو", category: "تقارير", url: "رابط الفيديو المباشر" }
+];
+
+const library = document.getElementById("videoLibrary");
+const player = document.getElementById("mainVideo");
+
+if (videos.length) {
+  library.innerHTML = "";
+  videos.forEach((video) => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const thumb = document.createElement("div");
+    thumb.className = "thumb";
+    thumb.textContent = "▶";
+
+    const content = document.createElement("div");
+    content.className = "card-content";
+
+    const title = document.createElement("h3");
+    title.textContent = video.title;
+
+    const category = document.createElement("p");
+    category.textContent = video.category;
+
+    const play = document.createElement("button");
+    play.className = "play";
+    play.textContent = "مشاهدة الفيديو";
+    play.type = "button";
+    play.addEventListener("click", () => {
+      player.src = video.url;
+      player.load();
+      player.play().catch(() => {});
+      window.scrollTo({top: 0, behavior: "smooth"});
+    });
+
+    content.append(title, category, play);
+    card.append(thumb, content);
+    library.append(card);
+  });
+}
+</script>
+
+</body>
+</html>
