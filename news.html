@@ -1,213 +1,167 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الأخبار | قناة الجنوب الفضائية</title>
+<title>أخبار قناة الجنوب الفضائية</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#f2f4f6;color:#17232d;
- font-family:Tahoma,Arial,sans-serif;
-}
-header{
- background:#102b40;color:white;
- padding:20px 5%;
- display:flex;align-items:center;
- justify-content:space-between;flex-wrap:wrap;gap:15px;
- border-bottom:4px solid #d92332;
-}
-.brand h1{font-size:23px;margin:0}
-.brand p{margin:7px 0 0;color:#d8e5ec;font-size:13px}
-nav{display:flex;gap:16px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-size:14px}
-nav a:hover{color:#f5c75b}
-.breaking{
- background:#d92332;color:white;
- display:flex;align-items:center;gap:15px;
- overflow:hidden;padding:12px 5%;
-}
-.breaking strong{white-space:nowrap}
-.breaking span{font-size:14px;line-height:1.7}
-.container{max-width:1150px;margin:30px auto;padding:0 18px}
-.section-title{
- font-size:23px;border-right:5px solid #d92332;
- padding-right:12px;margin:30px 0 20px;
-}
-.categories{
- display:flex;gap:10px;flex-wrap:wrap;
- margin-bottom:25px;
-}
-.category{
- background:white;border:1px solid #dce2e7;
- border-radius:20px;padding:9px 17px;
- color:#30495a;font-size:13px;
-}
-.category.active{background:#102b40;color:white}
-.featured{
- display:grid;grid-template-columns:1.5fr 1fr;
- gap:18px;
-}
-.feature{
- background:white;border-radius:10px;
- overflow:hidden;box-shadow:0 3px 12px #00000010;
-}
-.feature img{
- width:100%;height:245px;object-fit:cover;
- display:block;background:#dce3e8;
-}
-.feature-content{padding:18px}
-.feature h2,.feature h3{margin:0 0 12px;color:#163b53}
-.feature p{color:#65737d;line-height:1.9;font-size:14px}
-.read{
- color:#c52030;text-decoration:none;font-weight:bold;
- font-size:14px;
-}
-.news-grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:18px;
-}
-.news-card{
- background:white;border-radius:9px;
- overflow:hidden;box-shadow:0 3px 12px #00000010;
-}
-.news-card img{
- width:100%;height:175px;object-fit:cover;
- display:block;background:#dce3e8;
-}
-.news-content{padding:16px}
-.news-content small{color:#c52030}
-.news-content h3{font-size:17px;line-height:1.7;margin:10px 0}
-.news-content p{font-size:13px;color:#687680;line-height:1.8}
-.empty{
- background:white;padding:35px;text-align:center;
- color:#687680;border-radius:10px;
-}
-.about{
- background:#102b40;color:white;
- text-align:center;padding:30px 15px;
- line-height:2;margin-top:45px;
-}
-footer{
- background:#091722;color:#bdcbd4;
- text-align:center;padding:20px;font-size:13px;
-}
-@media(max-width:750px){
- .featured{grid-template-columns:1fr}
- .news-grid{grid-template-columns:repeat(2,1fr)}
- header{justify-content:center;text-align:center}
- nav{justify-content:center}
-}
-@media(max-width:480px){
- .news-grid{grid-template-columns:1fr}
- .feature img{height:200px}
-}
+body{margin:0;background:#071426;color:#fff;font-family:Tahoma,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+header{background:linear-gradient(120deg,#071426,#173653);padding:15px;border-bottom:3px solid #c92332}
+.header-inner{max-width:1100px;margin:auto;display:flex;align-items:center;gap:15px}
+.logo{width:110px;height:65px;object-fit:contain}
+.brand h1{font-size:22px;margin:0 0 7px}
+.brand p{margin:0;color:#e6bd62}
+nav{background:#102945;padding:13px;text-align:center;position:sticky;top:0;z-index:5}
+nav a{display:inline-block;margin:5px 10px;font-size:14px;color:#e8edf4}
+nav a:hover{color:#ff6974}
+.container{max-width:1100px;margin:auto;padding:22px 15px}
+.heading{border-right:4px solid #c92332;padding-right:13px;margin-bottom:22px}
+.heading h2{margin:0 0 8px;font-size:25px}
+.heading p{color:#bdcada;margin:0;line-height:1.8}
+.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.news-card{background:#10243c;border:1px solid #294766;border-radius:10px;overflow:hidden;transition:.2s}
+.news-card:hover{transform:translateY(-4px);border-color:#c92332}
+.news-card img{width:100%;height:190px;object-fit:cover;display:block;background:#172d43}
+.news-body{padding:15px}
+.news-body small{color:#e6bd62}
+.news-body h3{font-size:18px;line-height:1.7;margin:9px 0}
+.news-body p{font-size:14px;line-height:1.9;color:#c3cfdd;white-space:pre-line}
+.read-more{display:inline-block;background:#c92332;padding:9px 14px;border-radius:5px;margin-top:8px;font-size:13px}
+.state{background:#10243c;border:1px solid #294766;padding:20px;border-radius:9px;text-align:center;line-height:1.9;color:#d3deea}
+footer{background:#030a13;text-align:center;padding:25px;margin-top:40px;color:#aab8c8;line-height:2}
+footer img{width:120px;height:60px;object-fit:contain}
+@media(max-width:750px){.news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.news-grid{grid-template-columns:1fr}.news-card img{height:210px}.header-inner{flex-wrap:wrap;justify-content:center;text-align:center}.brand h1{font-size:19px}}
 </style>
 </head>
 <body>
 
 <header>
- <div class="brand">
-  <h1>قناة الجنوب الفضائية</h1>
-  <p>صوت شعب الجنوب</p>
+ <div class="header-inner">
+  <img class="logo" src="file_00000000184c81f483d7052251612c2a.png" alt="شعار قناة الجنوب">
+  <div class="brand">
+   <h1>قناة الجنوب الفضائية</h1>
+   <p>صوت شعب الجنوب</p>
+  </div>
  </div>
- <nav>
-  <a href="index.html">الرئيسية</a>
-  <a href="live.html">البث المباشر</a>
-  <a href="news.html">الأخبار</a>
-  <a href="programs.html">البرامج</a>
-  <a href="videos.html">مكتبة الفيديو</a>
-  <a href="about.html">من نحن</a>
- </nav>
 </header>
 
-<div class="breaking">
- <strong>عاجل</strong>
- <span>مرحباً بكم في الصفحة الإخبارية لقناة الجنوب الفضائية</span>
-</div>
+<nav>
+ <a href="index.html">الرئيسية</a>
+ <a href="live.html">البث المباشر</a>
+ <a href="news.html">الأخبار</a>
+ <a href="programs.html">البرامج</a>
+ <a href="videos.html">الفيديوهات</a>
+ <a href="about.html">عن القناة</a>
+</nav>
 
 <main class="container">
-
- <h2 class="section-title">الأخبار الرئيسية</h2>
-
- <div class="categories">
-  <span class="category active">كل الأخبار</span>
-  <span class="category">أخبار محلية</span>
-  <span class="category">سياسية</span>
-  <span class="category">اقتصادية</span>
-  <span class="category">دولية</span>
+ <div class="heading">
+  <h2>آخر الأخبار</h2>
+  <p>تابع أخبار وتغطيات وتقارير قناة الجنوب الفضائية.</p>
  </div>
 
- <section class="featured">
-  <article class="feature">
-   <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000" alt="الأخبار الرئيسية">
-   <div class="feature-content">
-    <h2>أبرز الأخبار والتغطيات</h2>
-    <p>تابعوا عبر قناة الجنوب الفضائية آخر المستجدات والتغطيات الإخبارية والتقارير من مختلف المناطق.</p>
-    <span class="read">الأخبار والتقارير</span>
-   </div>
-  </article>
-
-  <article class="feature">
-   <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800" alt="التغطيات الإعلامية">
-   <div class="feature-content">
-    <h3>التغطية الإخبارية</h3>
-    <p>منصة لمتابعة الأحداث والتطورات والتقارير الإعلامية أولاً بأول.</p>
-    <span class="read">قناة الجنوب الفضائية</span>
-   </div>
-  </article>
- </section>
-
- <h2 class="section-title">آخر الأخبار</h2>
-
- <section class="news-grid">
-
-  <article class="news-card">
-   <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=700" alt="أخبار سياسية">
-   <div class="news-content">
-    <small>أخبار سياسية</small>
-    <h3>متابعة آخر التطورات السياسية</h3>
-    <p>تغطية ومتابعة لأبرز المستجدات السياسية والتطورات الإقليمية.</p>
-   </div>
-  </article>
-
-  <article class="news-card">
-   <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=700" alt="أخبار اقتصادية">
-   <div class="news-content">
-    <small>أخبار اقتصادية</small>
-    <h3>متابعة الشأن الاقتصادي</h3>
-    <p>تقارير حول الأسواق والاقتصاد والخدمات والأوضاع المعيشية.</p>
-   </div>
-  </article>
-
-  <article class="news-card">
-   <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700" alt="تقارير">
-   <div class="news-content">
-    <small>تقارير</small>
-    <h3>تقارير ميدانية وإعلامية</h3>
-    <p>مساحة للتقارير المصورة والموضوعات الصحفية المتنوعة.</p>
-   </div>
-  </article>
-
- </section>
-
- <div class="empty" style="margin-top:22px">
-  سيتم عرض الأخبار الجديدة هنا بعد ربط الصفحة بلوحة التحكم.
+ <div id="newsList" class="news-grid">
+  <div class="state">جارٍ تحميل الأخبار...</div>
  </div>
-
 </main>
 
-<section class="about">
- <h2>قناة الجنوب الفضائية</h2>
- <p>صوت شعب الجنوب</p>
- <p>نقل الخبر والتغطية الإعلامية والبرامج المتنوعة.</p>
-</section>
-
 <footer>
- جميع الحقوق محفوظة © قناة الجنوب الفضائية
+ <img src="file_00000000184c81f483d7052251612c2a.png" alt="شعار القناة">
+ <div><strong>قناة الجنوب الفضائية</strong></div>
+ <div>صوت شعب الجنوب</div>
+ <div>جميع الحقوق محفوظة © 2026</div>
 </footer>
 
+<script type="module">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+ getFirestore, collection, getDocs, query, where, orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyCPdzH9CCUgzrF1x8ttxRVWHMjyXObs8yM",
+ authDomain: "janoob-tv.firebaseapp.com",
+ projectId: "janoob-tv",
+ storageBucket: "janoob-tv.firebasestorage.app",
+ messagingSenderId: "53846628655",
+ appId: "1:53846628655:web:2300300cfb13b9f2f469da",
+ measurementId: "G-2MY4E62F7R"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const list = document.getElementById("newsList");
+
+function safeText(value=""){
+ return String(value).replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+function safeUrl(value=""){
+ try{
+  const url = new URL(value);
+  return url.protocol === "https:" ? url.href : "";
+ }catch{
+  return "";
+ }
+}
+
+function dateText(timestamp){
+ if(!timestamp || !timestamp.toDate) return "";
+ return timestamp.toDate().toLocaleDateString("ar",{year:"numeric",month:"long",day:"numeric"});
+}
+
+async function loadNews(){
+ try{
+  const newsQuery = query(
+   collection(db,"news"),
+   where("published","==",true),
+   orderBy("createdAt","desc")
+  );
+
+  const snapshot = await getDocs(newsQuery);
+
+  if(snapshot.empty){
+   list.innerHTML = '<div class="state">لا توجد أخبار منشورة حالياً. تابعونا قريباً.</div>';
+   return;
+  }
+
+  list.innerHTML = "";
+
+  snapshot.forEach(document => {
+   const item = document.data();
+   const image = safeUrl(item.imageUrl || "");
+   const link = safeUrl(item.url || "");
+   const article = document.createElement("article");
+   article.className = "news-card";
+
+   article.innerHTML = `
+    ${image ? `<img src="${safeText(image)}" alt="${safeText(item.title || "خبر")}" loading="lazy">` : ""}
+    <div class="news-body">
+     <small>${dateText(item.createdAt)}</small>
+     <h3>${safeText(item.title || "خبر من قناة الجنوب")}</h3>
+     <p>${safeText(item.description || "")}</p>
+     ${link ? `<a class="read-more" href="${safeText(link)}" target="_blank" rel="noopener noreferrer">التفاصيل</a>` : ""}
+    </div>
+   `;
+
+   list.appendChild(article);
+  });
+
+ }catch(error){
+  console.error("News loading error:",error);
+  list.innerHTML = '<div class="state">تعذر تحميل الأخبار. يرجى المحاولة لاحقاً.</div>';
+ }
+}
+
+loadNews();
+</script>
+
 </body>
-</html>
+ </html>
