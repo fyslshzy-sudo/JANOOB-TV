@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قناة الجنوب الفضائية | صوت شعب الجنوب</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Tahoma,Arial,sans-serif;
+ background:#f3f5f7;
+ color:#17212b;
+}
+header{
+ background:#102b40;
+ color:white;
+ padding:18px 5%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:15px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+ width:55px;height:55px;border-radius:50%;
+ background:linear-gradient(to bottom,#fff 0 33%,#168447 33% 66%,#111 66%);
+ border:2px solid white;
+ position:relative;
+}
+.logo:after{
+ content:"";position:absolute;left:0;top:0;
+ border-top:27px solid transparent;
+ border-bottom:27px solid transparent;
+ border-left:25px solid #d92332;
+}
+.brand h1{font-size:23px;margin:0}
+.brand p{margin:5px 0 0;color:#d7e4ed;font-size:13px}
+nav{display:flex;gap:17px;flex-wrap:wrap}
+nav a{
+ color:white;text-decoration:none;font-size:14px;
+}
+nav a:hover{color:#f4c75e}
+.hero{
+ min-height:390px;
+ background:linear-gradient(120deg,#102b40ed,#174e66dd),
+ linear-gradient(45deg,#123,#456);
+ color:white;text-align:center;
+ display:flex;flex-direction:column;
+ justify-content:center;align-items:center;
+ padding:45px 20px;
+}
+.hero h2{font-size:36px;margin:0 0 15px}
+.hero p{font-size:19px;line-height:1.9;max-width:650px}
+.live-button{
+ display:inline-block;margin-top:18px;
+ background:#d92332;color:white;
+ padding:14px 28px;border-radius:7px;
+ text-decoration:none;font-weight:bold;
+}
+.section{padding:35px 5%}
+.section-title{
+ border-right:5px solid #d92332;
+ padding-right:12px;margin-bottom:22px;
+ font-size:23px;
+}
+.cards{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;
+}
+.card{
+ background:white;border-radius:10px;
+ overflow:hidden;box-shadow:0 3px 12px #00000012;
+}
+.card-image{
+ height:145px;background:#dce5eb;
+ display:flex;align-items:center;justify-content:center;
+ color:#526575;font-size:42px;
+}
+.card-content{padding:18px}
+.card h3{margin:0 0 10px;color:#173c54}
+.card p{color:#65727c;line-height:1.8;font-size:14px}
+.card a{color:#c52030;text-decoration:none;font-weight:bold}
+.about{
+ background:#102b40;color:white;
+ padding:35px 7%;text-align:center;line-height:2;
+}
+footer{
+ background:#091c2a;color:#cbd6de;
+ text-align:center;padding:20px;font-size:13px;
+}
+@media(max-width:600px){
+ header{justify-content:center;text-align:center}
+ nav{justify-content:center}
+ .hero h2{font-size:27px}
+ .hero p{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="brand">
+  <div class="logo"></div>
+  <div>
+   <h1>قناة الجنوب الفضائية</h1>
+   <p>صوت شعب الجنوب</p>
+  </div>
+ </div>
+ <nav>
+  <a href="index.html">الرئيسية</a>
+  <a href="live.html">البث المباشر</a>
+  <a href="news.html">الأخبار</a>
+  <a href="programs.html">البرامج</a>
+  <a href="videos.html">مكتبة الفيديو</a>
+  <a href="about.html">من نحن</a>
+ </nav>
+</header>
+
+<section class="hero">
+ <h2>قناة الجنوب الفضائية</h2>
+ <p>
+  منصة إعلامية لنقل الأخبار والأحداث والبرامج
+  وتسليط الضوء على قضايا المجتمع وتطلعاته.
+  <br>
+  <strong>صوت شعب الجنوب</strong>
+ </p>
+ <a class="live-button" href="live.html">شاهد البث المباشر</a>
+</section>
+
+<section class="section">
+ <h2 class="section-title">أقسام القناة</h2>
+ <div class="cards">
+
+  <div class="card">
+   <div class="card-image">▶</div>
+   <div class="card-content">
+    <h3>البث المباشر</h3>
+    <p>تابع البث المباشر لقناة الجنوب الفضائية.</p>
+    <a href="live.html">مشاهدة البث ←</a>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-image">📰</div>
+   <div class="card-content">
+    <h3>الأخبار</h3>
+    <p>تابع آخر الأخبار والتغطيات والمستجدات.</p>
+    <a href="news.html">تصفح الأخبار ←</a>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-image">🎙</div>
+   <div class="card-content">
+    <h3>البرامج</h3>
+    <p>شاهد برامج القناة وتقاريرها الإعلامية.</p>
+    <a href="programs.html">اكتشف البرامج ←</a>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-image">🎬</div>
+   <div class="card-content">
+    <h3>مكتبة الفيديوهات</h3>
+    <p>شاهد أرشيف الفيديوهات والتقارير المصورة.</p>
+    <a href="videos.html">تصفح المكتبة ←</a>
+   </div>
+  </div>
+
+ </div>
+</section>
+
+<section class="about">
+ <h2>قناة الجنوب الفضائية</h2>
+ <p>صوت شعب الجنوب</p>
+ <p>منصة إعلامية تهتم بالأخبار والبرامج والتغطيات الإعلامية.</p>
+</section>
+
+<footer>
+ جميع الحقوق محفوظة © قناة الجنوب الفضائية
+</footer>
+
+</body>
+</html>
